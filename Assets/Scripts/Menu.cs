@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject player, enemyStartLocation, enemy, playerStartLocation;
     [SerializeField] private ProjectileSpawner projectileSpawner;
     [SerializeField] private Text scoreText;
-    private GameObject[] projectiles;
+    private GameObject[] projectiles, upgrades, blockCasts;
 
     private SoundManager soundManager;
 
@@ -39,13 +39,30 @@ public class Menu : MonoBehaviour
     {
         soundManager.SoundEffects("clickStart");
 
-        //reset game, destroy all projectiles on sphere
+        //destroy upgrade cylinders
+        upgrades = GameObject.FindGameObjectsWithTag("Upgrade");
+        foreach (GameObject upgrade in upgrades)
+        {
+            Destroy(upgrade.transform.parent.gameObject);
+        }
+
+        //destroy all projectiles on sphere
         projectiles = GameObject.FindGameObjectsWithTag("Projectile");
         foreach (GameObject projectile in projectiles)
         {
             projectile.SetActive(false);
             projectileSpawner.queuedProjectiles.Enqueue(projectile.transform.parent.gameObject);
+         
         }
+
+        blockCasts = GameObject.FindGameObjectsWithTag("BlockSphereCast");
+        foreach (GameObject block in blockCasts)
+        {
+            block.transform.position += transform.up * 500;
+        }
+
+
+
 
         //reset player
         Player.dead = false;

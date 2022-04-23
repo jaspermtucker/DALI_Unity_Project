@@ -57,7 +57,11 @@ public class Projectile : MonoBehaviour
 
         //only requeue if this is a normal projectile
         if (!isUpgradeProjectile)
+        {
             projectileSpawner.queuedProjectiles.Enqueue(gameObject);
+
+            transform.position += projectile.transform.up * 500;
+        }
         else
             Destroy(gameObject);
     }
