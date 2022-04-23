@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] private float movementSpeed = 5;
     private Vector3 gravityUp;
-    private float gravityValue = -20;
+    private float gravityValue = -10;
 
     public static GameObject sphere;
 

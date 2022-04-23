@@ -60,7 +60,7 @@ public class Projectile : MonoBehaviour
         {
             projectileSpawner.queuedProjectiles.Enqueue(gameObject);
 
-            transform.position += projectile.transform.up * 500;
+            transform.position += transform.up * 500;
         }
         else
             Destroy(gameObject);
