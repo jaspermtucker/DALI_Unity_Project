@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour
 
         projectile.SetActive(false);
 
-        //only requeue if this is a normal projectile
+        //only requeue if this is a normal projectile, and move out of the way
         if (!isUpgradeProjectile)
         {
             projectileSpawner.queuedProjectiles.Enqueue(gameObject);

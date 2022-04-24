@@ -34,11 +34,12 @@ public class Gun : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            if (!Player.dead)
-            {
-                soundManager.SoundEffects("shoot");
-                Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            }
+            if (Player.dead)
+                StopCoroutine("Shoot");
+            
+            soundManager.SoundEffects("shoot");
+            Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+         
             yield return new WaitForSeconds(0.5f);
         }
 

@@ -55,6 +55,7 @@ public class Menu : MonoBehaviour
          
         }
 
+        //put blockCasts out of the way
         blockCasts = GameObject.FindGameObjectsWithTag("BlockSphereCast");
         foreach (GameObject block in blockCasts)
         {

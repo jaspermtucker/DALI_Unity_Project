@@ -39,6 +39,9 @@ public class Bullet : MonoBehaviour
 
         rb.MovePosition(rb.position + transform.forward * movementSpeed);
 
+        if (Player.dead)
+            Destroy(gameObject);
+
     }
 
     private void OnCollisionEnter(Collision collision)
