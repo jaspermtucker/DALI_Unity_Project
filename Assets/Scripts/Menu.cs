@@ -37,55 +37,55 @@ public class Menu : MonoBehaviour
 
     public void Retry()
     {
-        soundManager.SoundEffects("clickStart");
-
-        //destroy upgrade cylinders
-        upgrades = GameObject.FindGameObjectsWithTag("Upgrade");
-        foreach (GameObject upgrade in upgrades)
+        if (Player.canPlayAgain)
         {
-            Destroy(upgrade.transform.parent.gameObject);
+            Player.canPlayAgain = false;
+            soundManager.SoundEffects("clickStart");
+
+            //destroy upgrade cylinders
+            upgrades = GameObject.FindGameObjectsWithTag("Upgrade");
+            foreach (GameObject upgrade in upgrades)
+            {
+                Destroy(upgrade.transform.parent.gameObject);
+            }
+
+            //destroy all projectiles on sphere
+            projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+            foreach (GameObject projectile in projectiles)
+            {
+                projectile.SetActive(false);
+                projectileSpawner.queuedProjectiles.Enqueue(projectile.transform.parent.gameObject);
+
+            }
+
+            //put blockCasts out of the way
+            blockCasts = GameObject.FindGameObjectsWithTag("BlockSphereCast");
+            foreach (GameObject block in blockCasts)
+            {
+                block.transform.position += transform.up * 500;
+            }
+
+            //reset player
+            Player.dead = false;
+            player.transform.position = playerStartLocation.transform.position;
+            player.GetComponentInChildren<MeshRenderer>().enabled = true;
+            player.GetComponent<Collider>().enabled = true;
+
+            //start spawning projecitles again
+            StartCoroutine(projectileSpawner.SpawnProjectiles());
+
+            //reset enemy
+            enemy.transform.position = enemyStartLocation.transform.position;
+
+            //disable unwanted items
+            foreach (GameObject item in itemsToDisableRetry)
+                item.SetActive(false);
+
+            //reset score
+            scoreText.text = "0";
+            scoreText.enabled = true;
+
         }
-
-        //destroy all projectiles on sphere
-        projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-        foreach (GameObject projectile in projectiles)
-        {
-            projectile.SetActive(false);
-            projectileSpawner.queuedProjectiles.Enqueue(projectile.transform.parent.gameObject);
-         
-        }
-
-        //put blockCasts out of the way
-        blockCasts = GameObject.FindGameObjectsWithTag("BlockSphereCast");
-        foreach (GameObject block in blockCasts)
-        {
-            block.transform.position += transform.up * 500;
-        }
-
-
-
-
-        //reset player
-        Player.dead = false;
-        player.transform.position = playerStartLocation.transform.position;
-        player.GetComponentInChildren<MeshRenderer>().enabled = true;
-        player.GetComponent<Collider>().enabled = true;
-
-        //start spawning projecitles again
-        StartCoroutine(projectileSpawner.SpawnProjectiles());
-
-        //reset enemy
-        enemy.transform.position = enemyStartLocation.transform.position;
-
-        //disable unwanted items
-        foreach (GameObject item in itemsToDisableRetry)
-            item.SetActive(false);
-
-        //reset score
-        scoreText.text = "0";
-        scoreText.enabled = true;
-
-        
 
     }
 }

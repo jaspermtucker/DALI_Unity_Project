@@ -141,7 +141,7 @@ public class ProjectileSpawner : MonoBehaviour
     public IEnumerator SpawnProjectiles()
     {
         //continuously spawn projectiles on a timer
-
+        
         PickSpot();
         yield return new WaitForSeconds(1);
 

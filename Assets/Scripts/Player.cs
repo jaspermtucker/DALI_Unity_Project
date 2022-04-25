@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     private SoundManager soundManager;
 
+    public static bool canPlayAgain;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,7 +120,16 @@ public class Player : MonoBehaviour
             bestScoreText.gameObject.SetActive(true);
 
             PlayerPrefs.SetInt("BestScore", ProjectileSpawner.bestScore);
+
+            //hitting "retry" immediately may result in bug, force player to wait 1 second
+            StartCoroutine(PlayAgain());
         }
+    }
+
+    IEnumerator PlayAgain()
+    {
+        yield return new WaitForSeconds(1);
+        canPlayAgain = true;
     }
 
 }

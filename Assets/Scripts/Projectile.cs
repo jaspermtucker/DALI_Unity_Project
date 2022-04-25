@@ -59,7 +59,6 @@ public class Projectile : MonoBehaviour
         if (!isUpgradeProjectile)
         {
             projectileSpawner.queuedProjectiles.Enqueue(gameObject);
-
             transform.position += transform.up * 500;
         }
         else

@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         //remove projectiles on colliding with them
         if (collision.gameObject.CompareTag("Projectile") || collision.gameObject.CompareTag("Upgrade"))
         {
-            StartCoroutine(collision.transform.GetComponentInParent<Projectile>().Remove());
+            StartCoroutine(collision.transform.gameObject.GetComponentInParent<Projectile>().Remove());
         }
     }
 

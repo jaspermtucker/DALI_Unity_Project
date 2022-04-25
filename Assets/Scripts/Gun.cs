@@ -35,7 +35,10 @@ public class Gun : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             if (Player.dead)
+            {
+                hasUpgradePs.Stop();
                 StopCoroutine("Shoot");
+            }
             
             soundManager.SoundEffects("shoot");
             Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
